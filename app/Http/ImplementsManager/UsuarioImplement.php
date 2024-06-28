@@ -74,4 +74,9 @@ class UsuarioImplement
 
         return  $conexion->table('usuarios')->where('id', $id_user)->delete();
     }
+
+    function getUser($conexion){
+        return $conexion->select('SELECT usuarios.id, usuarios.nombre, roles.nombre as cargo FROM `usuarios`
+        INNER JOIN roles ON roles.id = usuarios.id_roles');
+    }
 }

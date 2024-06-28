@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\ImplementsManager\UsuarioImplement;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-//!los nombres de las clases son en mayúscula  'UserController'
+
 class userController extends Controller
 {
     private $userimplements;
@@ -22,7 +22,7 @@ class userController extends Controller
      *
      * @param Request $request
      * 
-     * @return array
+     * @return mixed
      * 
      */
     function crear_usuario(Request $request){
@@ -42,7 +42,7 @@ class userController extends Controller
      *
      * @param Request $request
      * 
-     * @return array
+     * @return mixed 
      * 
      */
     function update_user(Request $request){
@@ -63,7 +63,7 @@ class userController extends Controller
      *
      * @param Request $request
      * 
-     * @return number
+     * @return mixed
      * 
      */
     function delete_user(Request $request){
@@ -74,5 +74,14 @@ class userController extends Controller
     }
         return response($res, 200)->header('Content-Type', 'application/json');
 
+    }
+
+    function getUser(Request $request){
+        try{
+            $res = $this->userimplements->getUser(DB::connection());
+    }catch(\Exception $e){
+        return $e;
+    }
+        return response($res, 200)->header('Content-Type', 'application/json');
     }
 }

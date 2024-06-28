@@ -29,3 +29,5 @@ Route::delete('delete-status', [\App\Http\Controllers\rolesController::class, 'd
 // apis de usuario
 
 Route::post('crear-user', [\App\Http\Controllers\userController::class, 'crear_usuario']);
+
+Route::get('obtener-usuario', [\App\Http\Controllers\userController::class, 'getUser']);
