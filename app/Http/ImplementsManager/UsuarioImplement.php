@@ -1,7 +1,9 @@
-<?php 
+<?php
+
 namespace App\Http\ImplementsManager;
 
-class UsuarioImplement{
+class UsuarioImplement
+{
 
     /**
      * para crear usuario craete_user]
@@ -15,18 +17,18 @@ class UsuarioImplement{
      * @return array
      * 
      */
-    public function crear_usuario($conexion, $nombre_user, $user, $pass, $id_rol){
-        dump($nombre_user);
+    public function crear_usuario($conexion, $nombre_user, $user, $pass, $id_rol)
+    {
         $data_user = [
             'nombre' => $nombre_user,
-            'usuario'=> $user,
+            'usuario' => $user,
             'clave' => $pass,
             'id_roles' => $id_rol
         ];
         $conexion->table('usuarios')->insert($data_user);
 
         return $data_user;
-    } 
+    }
 
     /**
      * actualizzar usuario
@@ -41,14 +43,18 @@ class UsuarioImplement{
      * @return array
      * 
      */
-    function update_user($conexion, $id_user, $nombre_user, $user, $pass, $id_ro){
+    function update_user($conexion, $id_user, $nombre_user, $user, $pass, $id_rol)
+    {
         $data_user = [
             'id' => $id_user,
             'nombre' => $nombre_user,
-            'usuario'=> $user,
+            'usuario' => $user,
             'clave' => $pass,
-            'id_roles' => $id_ro
+            'id_roles' => $id_rol
         ];
+
+        //* 'id_roles' debería llamarse  'id_rol' modificar columna
+
         $conexion->table('usuarios')->where('id', $id_user)->update($data_user);
 
         return $data_user;
@@ -63,10 +69,9 @@ class UsuarioImplement{
      * @return $conexion->table('usuarios')->where('id', $id_user)->delete();     
      * 
      */
-    function delete_user($conexion, $id_user){
-        
-        return  $conexion->table('usuarios')->where('id', $id_user)->delete();     
+    function delete_user($conexion, $id_user)
+    {
+
+        return  $conexion->table('usuarios')->where('id', $id_user)->delete();
     }
-
-
 }
