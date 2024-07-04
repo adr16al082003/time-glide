@@ -21,8 +21,8 @@ class UsuarioImplement
     {
         $data_user = [
             'nombre' => $nombre_user,
-            'usuario' => $user,
-            'clave' => $pass,
+            'usuario' => trim($user),
+            'clave' => trim($pass),
             'id_roles' => $id_rol
         ];
         $conexion->table('usuarios')->insert($data_user);
@@ -48,8 +48,8 @@ class UsuarioImplement
         $data_user = [
             'id' => $id_user,
             'nombre' => $nombre_user,
-            'usuario' => $user,
-            'clave' => $pass,
+            'usuario' => trim($user),
+            'clave' => trim($pass),
             'id_roles' => $id_rol
         ];
 
@@ -72,11 +72,40 @@ class UsuarioImplement
     function delete_user($conexion, $id_user)
     {
 
-        return  $conexion->table('usuarios')->where('id', $id_user)->delete();
+        return $conexion->table('usuarios')->where('id', $id_user)->delete();
     }
 
-    function getUser($conexion){
-        return $conexion->select('SELECT usuarios.id, usuarios.nombre, roles.nombre as cargo FROM `usuarios`
-        INNER JOIN roles ON roles.id = usuarios.id_roles');
+    function getUser($conexion)
+    {
+        
+    return  $conexion->select('SELECT usuarios.id, usuarios.nombre, roles.nombre as cargo FROM `usuarios`
+    INNER JOIN roles ON roles.id = usuarios.id_roles');
+
+    }
+
+    /**
+     * validar credenciales de los usuario
+     *
+     * @param mixed $conexion
+     * @param mixed $user
+     * @param mixed $pass
+     * 
+     * @return [type]
+     * 
+     */
+    function validateUser($conexion, $user, $pass)
+    {
+        $user_db = $conexion->selectOne('SELECT usuarios.id, usuarios.nombre, roles.nombre as cargo FROM `usuarios`
+        INNER JOIN roles ON roles.id = usuarios.id_roles WHERE usuarios.usuario = :user and usuarios.clave = :clave', [
+            'user' => $user,
+            'clave' => $pass
+        ]);
+
+        if(!empty($user_db)  and  trim($pass) == $user_db->clave) {
+            return $user_db;
+        } else {
+            throw new \Exception("credenciales incorrecta", 400);
+        }
+
     }
 }

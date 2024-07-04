@@ -21,13 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // apis de roles
 
 Route::post('status', [\App\Http\Controllers\rolesController::class, 'create_status']);
-
 Route::put('update-status', [\App\Http\Controllers\rolesController::class, 'update_status']);
-
 Route::delete('delete-status', [\App\Http\Controllers\rolesController::class, 'delete_status']);
 
 // apis de usuario
 
 Route::post('crear-user', [\App\Http\Controllers\userController::class, 'crear_usuario']);
-
 Route::get('obtener-usuario', [\App\Http\Controllers\userController::class, 'getUser']);
+Route::post('validate-user',[\App\Http\Controllers\userController::class, 'validateUser']);

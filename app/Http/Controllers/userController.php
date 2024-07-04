@@ -84,4 +84,18 @@ class userController extends Controller
     }
         return response($res, 200)->header('Content-Type', 'application/json');
     }
+
+    function validateUser(Request $request){
+        try{
+            if(!$request->filled('user')) throw new \Exception("user es requerido", 400);
+            if(!$request->filled('pass')) throw new \Exception("pass es requerido", 400);
+            
+            $res = $this->userimplements->validateUser(DB::connection(), $request->user
+            ,$request->pass);
+            }catch(\Exception $e){
+                dump($e);
+                return $e;
+        }
+        return response([$res], 200)->header('Content-Type', 'application/json');
+    }
 }
