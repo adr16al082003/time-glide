@@ -29,3 +29,7 @@ Route::delete('delete-status', [\App\Http\Controllers\rolesController::class, 'd
 Route::post('crear-user', [\App\Http\Controllers\userController::class, 'crear_usuario']);
 Route::get('obtener-usuario', [\App\Http\Controllers\userController::class, 'getUser']);
 Route::post('validate-user',[\App\Http\Controllers\userController::class, 'validateUser']);
+
+//apis de clientes
+Route::post('crear-cliente',[\App\Http\Controllers\clienteController::class, 'create_cliente']);
+
