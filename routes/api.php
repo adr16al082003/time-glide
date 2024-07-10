@@ -32,4 +32,5 @@ Route::post('validate-user',[\App\Http\Controllers\userController::class, 'valid
 
 //apis de clientes
 Route::post('crear-cliente',[\App\Http\Controllers\clienteController::class, 'create_cliente']);
-
+Route::put('update-cliente',[\App\Http\Controllers\clienteController::class, 'update_cliente']);
+Route::delete('delete-cliente/{id}',[\App\Http\Controllers\clienteController::class, 'delete_cliente']);

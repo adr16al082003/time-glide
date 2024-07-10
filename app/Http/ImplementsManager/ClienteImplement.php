@@ -2,7 +2,8 @@
 
 namespace App\Http\ImplementsManager;
 
-class ClienteImplement{
+class ClienteImplement
+{
 
     /**
      * [Description for create_cliente]
@@ -18,30 +19,31 @@ class ClienteImplement{
      * @return [type]
      * 
      */
-    function create_cliente($conexion, $nombre, $ci, $ci_i, $telf, $direccion, $genero){
+    function create_cliente($conexion, $nombre, $ci, $ci_i, $telf, $direccion, $genero)
+    {
 
         $data_cli = [
             'nombre' => $nombre,
             'identificacion' => $ci,
             'identificacion_iso' => $ci_i,
-            'telefonos' => $telf,
+            'telefonos' => json_encode($telf),
             'direcciones' => $direccion,
             'genero' => $genero
         ];
 
         $conexion->table('clientes')->insert($data_cli);
-
         return $data_cli;
     }
 
-    function update_cliente($conexion, $id, $nombre, $ci, $ci_i, $telf, $direccion, $genero){
+    function update_cliente($conexion, $id, $nombre, $ci, $ci_i, $telf, $direccion, $genero)
+    {
 
         $data_cli = [
             'id' => $id,
             'nombre' => $nombre,
             'identificacion' => $ci,
             'identificacion_iso' => $ci_i,
-            'telefonos' => $telf,
+            'telefonos' => json_encode($telf),
             'direcciones' => $direccion,
             'genero' => $genero
         ];
@@ -51,7 +53,12 @@ class ClienteImplement{
         return $data_cli;
     }
 
-    function delete_cliente($conexion, $id){
+    function delete_cliente($conexion, $id)
+    {
         return $conexion->table('clientes')->where('id', $id)->delete();
+    }
+
+    function get_cliente($conexion){
+        return $conexion->table('clientes')->get();
     }
 }

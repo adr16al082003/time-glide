@@ -43,9 +43,9 @@ class clienteController extends Controller
         return response($res, 200)->header('Content-Type', 'application/json');
     }
 
-    function delete_cliente(Request $request){
+    function delete_cliente($id){
         try{
-            $res = $this->clienteimplement->delete_cliente(DB::connection(), $request->id);
+            $res = $this->clienteimplement->delete_cliente(DB::connection(),$id);
         }catch(\Exception $e){
             return $e;
         }
