@@ -77,35 +77,36 @@ class UsuarioImplement
 
     function getUser($conexion)
     {
-        
-    return  $conexion->select('SELECT usuarios.id, usuarios.nombre, roles.nombre as cargo FROM `usuarios`
-    INNER JOIN roles ON roles.id = usuarios.id_roles');
 
+        return  $conexion->select('SELECT usuarios.id, usuarios.nombre, roles.nombre as cargo FROM `usuarios`
+    INNER JOIN roles ON roles.id = usuarios.id_roles');
     }
 
     /**
      * validar credenciales de los usuario
      *
      * @param mixed $conexion
-     * @param mixed $user
-     * @param mixed $pass
+     * @param string $user
+     * @param string $pass
      * 
-     * @return [type]
+     * @return object
      * 
      */
-    function validateUser($conexion, $user, $pass)
+    function validateUser($conexion, $user, $clave)
     {
-        $user_db = $conexion->selectOne('SELECT usuarios.id, usuarios.nombre, roles.nombre as cargo FROM `usuarios`
+        $user_db = $conexion->selectOne('SELECT usuarios.id, usuarios.nombre, usuarios.clave, roles.nombre as cargo FROM usuarios
         INNER JOIN roles ON roles.id = usuarios.id_roles WHERE usuarios.usuario = :user and usuarios.clave = :clave', [
             'user' => $user,
-            'clave' => $pass
+            'clave' => $clave
         ]);
 
-        if(!empty($user_db)  and  trim($pass) == $user_db->clave) {
+        if (!empty($user_db)  and  trim($clave) == $user_db->clave) {
+            //encintamos la clave 
+            $user_db->clave = hash('sha256', $user_db->clave);
+
             return $user_db;
         } else {
             throw new \Exception("credenciales incorrecta", 400);
         }
-
     }
 }

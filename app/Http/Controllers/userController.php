@@ -93,7 +93,6 @@ class userController extends Controller
             $res = $this->userimplements->validateUser(DB::connection(), $request->user
             ,$request->pass);
             }catch(\Exception $e){
-                dump($e);
                 return $e;
         }
         return response([$res], 200)->header('Content-Type', 'application/json');
