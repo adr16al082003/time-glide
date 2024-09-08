@@ -94,13 +94,26 @@ class UsuarioImplement
      */
     function validateUser($conexion, $user, $clave)
     {
-        $user_db = $conexion->selectOne('SELECT usuarios.id, usuarios.nombre, usuarios.clave, roles.nombre as cargo FROM usuarios
-        INNER JOIN roles ON roles.id = usuarios.id_roles WHERE usuarios.usuario = :user and usuarios.clave = :clave', [
+        $user_db = $conexion->selectOne("SELECT
+                    usuarios.id,
+                    usuarios.nombre,
+                    usuarios.clave,
+                    roles.nombre as cargo,
+                    roles.id as id_rol,
+                    JSON_OBJECT(
+	                    'create', IF(roles.w = 1, 'true', 'false'),
+	                    'edit', IF(roles.r = 1, 'true', 'false') ,
+ 	                    'delete',IF(roles.d = 1, 'true', 'false')
+                    ) as permissions
+                FROM usuarios
+                INNER JOIN roles ON roles.id = usuarios.id_roles
+                WHERE usuarios.usuario = :user and usuarios.clave = :clave", [
             'user' => $user,
             'clave' => $clave
         ]);
-
+        
         if (!empty($user_db)  and  trim($clave) == $user_db->clave) {
+            $user_db->permissions = json_decode($user_db->permissions);
             //encintamos la clave 
             $user_db->clave = hash('sha256', $user_db->clave);
 
