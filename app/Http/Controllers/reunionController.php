@@ -30,7 +30,8 @@ class reunionController extends Controller
             $res = $this->reunionimplements->update_reu(DB::connection(), $request->id,
             $request->fecha,
             $request->nombre,
-            $request->descripcion);
+            $request->descripcion,
+            id_p: $request->id_p);
         }catch(\Exception $e){
             return $e;
         }
@@ -44,5 +45,14 @@ class reunionController extends Controller
             return $e;
         }
         return response($res, 200)->header('Content-Type', 'application/json');
+    }
+
+    function getReu(Request &$request){
+        try{
+            $res = $this->reunionimplements->getReu(DB::connection());
+        }catch(\Exception $e){
+            return $e;
+        }
+        return response($res, 200)->header('content-type', 'application/json');
     }
 }

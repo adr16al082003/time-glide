@@ -58,7 +58,15 @@ class ClienteImplement
         return $conexion->table('clientes')->where('id', $id)->delete();
     }
 
-    function get_cliente($conexion){
+    function getCliente($conexion){
         return $conexion->table('clientes')->get();
+    }
+
+    function validateCli($conexion, $ci){
+        $data_cli = $conexion->selectOne('SELECT * FROM clientes WHERE clientes.identificacion = :identificacion', [
+            'identificacion' => $ci
+        ]);
+    
+            if(!empty($data_cli)) throw new \Exception("Cliente ya registrado");
     }
 }

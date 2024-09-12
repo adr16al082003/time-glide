@@ -40,6 +40,10 @@ class Asistenciasv1 extends Migration
             $table->json('telefonos');
             $table->longText('direcciones');
             $table->enum('genero', ['F', 'M']);
+            $table->string('parroquia', 300)->nullable(false);
+
+            $table->foreignId('id_parroquia')->nullable(false)->reference('id')->on('parroquias')
+                ->onDelete('restrict')->onUpdate('cascade');
         });
 
         Schema::create('reuniones', function (Blueprint $table) {
@@ -47,6 +51,9 @@ class Asistenciasv1 extends Migration
             $table->datetime('fecha')->nullable(false);
             $table->string('nombre', 300)->nullable(false);
             $table->longText('descripcion');
+
+            $table->foreignId('id_parroquia')->nullable(false)->reference('id')->on('parroquias')
+                ->onDelete('restrict')->onUpdate('cascade');
         });
 
         Schema::create('asistencias', function (Blueprint $table) {
@@ -55,6 +62,12 @@ class Asistenciasv1 extends Migration
 
             $table->foreignId('id_reunion')->nullable(false)->reference('id')->on('reuniones')
                 ->onDelete('restrict')->onUpdate('cascade');
+        });
+
+        Schema::create('parroquias', function (Blueprint $table) {
+            $table->id();
+            $table->string('parroquia')->nullable(false);
+
         });
     }
 
@@ -70,5 +83,7 @@ class Asistenciasv1 extends Migration
         Schema::dropIfExists('clientes');
         Schema::dropIfExists('reuniones');
         Schema::dropIfExists('asistencias');
+        Schema::dropIfExists('parroquias');
+
     }
 }

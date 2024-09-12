@@ -49,9 +49,9 @@ class rolesController extends Controller
     }
 
 // controlador de eliminar
-    function delete_status(Request $request){
+    function delete_status($id){
         try{
-            $res = $this->statusimplement->delete_status(DB::connection(), $request->id);
+            $res = $this->statusimplement->delete_status(DB::connection(), $id);
         }catch(\Exception $e){
             return $e;
         }

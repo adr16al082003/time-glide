@@ -66,9 +66,9 @@ class userController extends Controller
      * @return mixed
      * 
      */
-    function delete_user(Request $request){
+    function delete_user($id){
         try{
-            $res = $this->userimplements->delete_user(DB::connection(),$request->id);
+            $res = $this->userimplements->delete_user(DB::connection(),$id);
     }catch(\Exception $e){
         return $e;
     }
@@ -84,6 +84,7 @@ class userController extends Controller
     }
         return response($res, 200)->header('Content-Type', 'application/json');
     }
+
 
     function validateUser(Request $request){
         try{

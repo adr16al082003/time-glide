@@ -51,4 +51,23 @@ class clienteController extends Controller
         }
         return response($res, 200)->header('Content-Type', 'application/json');
     }
+
+    function getCliente(Request $request){
+        try{
+            $res = $this->clienteimplement->getCliente(DB::connection());
+        }catch(\Exception $e){
+            return $e;
+        }
+        return response($res, 200)->header('content-type', 'application/json');
+    }
+
+    function validateCli(Request $request){
+        try{
+            $this->clienteimplement->validateCli(DB::connection(), $request->ci);
+        }catch(\Exception $e){
+            return $e;
+        }
+        return response(1, 200)->header('content-type', 'application/json');
+    }
+
 }
