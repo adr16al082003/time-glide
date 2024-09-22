@@ -40,7 +40,7 @@ class Asistenciasv1 extends Migration
             $table->json('telefonos');
             $table->longText('direcciones');
             $table->enum('genero', ['F', 'M']);
-            $table->string('parroquia', 300)->nullable(false);
+            
 
             $table->foreignId('id_parroquia')->nullable(false)->reference('id')->on('parroquias')
                 ->onDelete('restrict')->onUpdate('cascade');

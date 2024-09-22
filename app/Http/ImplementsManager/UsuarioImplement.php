@@ -25,7 +25,7 @@ class UsuarioImplement
             'clave' => trim($pass),
             'id_roles' => $id_rol
         ];
-        $conexion->table('usuarios')->insert($data_user);
+        $data_user['id'] = $conexion->table('usuarios')->insertGetId($data_user);
 
         return $data_user;
     }
@@ -78,8 +78,20 @@ class UsuarioImplement
     function getUser($conexion)
     {
 
-        return  $conexion->select('SELECT usuarios.id, usuarios.nombre, roles.nombre as cargo FROM `usuarios`
-    INNER JOIN roles ON roles.id = usuarios.id_roles');
+        return  $conexion->select("SELECT
+        usuarios.id,
+        usuarios.nombre,
+        usuarios.usuario,
+        usuarios.clave,
+        roles.nombre as cargo,
+        roles.id as id_rol,
+        JSON_OBJECT(
+            'create', IF(roles.w = 1, 'true', 'false'),
+            'edit', IF(roles.r = 1, 'true', 'false') ,
+             'delete',IF(roles.d = 1, 'true', 'false')
+        ) as permissions
+    FROM usuarios
+    INNER JOIN roles ON roles.id = usuarios.id_roles");
     }
 
     /**
@@ -97,6 +109,7 @@ class UsuarioImplement
         $user_db = $conexion->selectOne("SELECT
                     usuarios.id,
                     usuarios.nombre,
+                    usuarios.usuario,
                     usuarios.clave,
                     roles.nombre as cargo,
                     roles.id as id_rol,
