@@ -29,7 +29,7 @@ Route::delete('delete-status/{id}', [\App\Http\Controllers\rolesController::clas
 Route::post('crear-user', [\App\Http\Controllers\userController::class, 'crear_usuario']);
 Route::get('obtener-usuario', [\App\Http\Controllers\userController::class, 'getUser']);
 Route::post('validate-user',[\App\Http\Controllers\userController::class, 'validateUser']);
-Route::delete('delete-user/{id}', [\App\Http\Controllers\rolesController::class, 'delete_user']);
+Route::delete('delete-user/{id}', [\App\Http\Controllers\userController::class, 'delete_user']);
 Route::put('update-user',[\App\Http\Controllers\userController::class, 'update_user']);
 
 

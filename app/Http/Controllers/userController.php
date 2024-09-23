@@ -28,7 +28,7 @@ class userController extends Controller
     function crear_usuario(Request $request){
         try {
             $res = $this->userimplements->crear_usuario(DB::connection(), $request->nombre,
-            $request->user,
+            $request->usuario,
             $request->clave,
             $request->id_rol);
         }catch(\Exception $e){
@@ -49,7 +49,7 @@ class userController extends Controller
         try {
             $res = $this->userimplements->update_user(DB::connection(), $request->id, 
             $request->nombre,
-            $request->user,
+            $request->usuario,
             $request->clave,
             $request->id_rol);
         }catch(\Exception $e){
@@ -88,10 +88,10 @@ class userController extends Controller
 
     function validateUser(Request $request){
         try{
-            if(!$request->filled('user')) throw new \Exception("user es requerido", 400);
+            if(!$request->filled('usuario')) throw new \Exception("usuario es requerido", 400);
             if(!$request->filled('clave')) throw new \Exception("clave es requerido", 400);
             
-            $res = $this->userimplements->validateUser(DB::connection(), $request->user
+            $res = $this->userimplements->validateUser(DB::connection(), $request->usuario
             ,$request->clave);
             }catch(\Exception $e){
                 return $e;

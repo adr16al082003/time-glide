@@ -90,7 +90,7 @@ class UsuarioImplement
      * solo se devuelve el usuario que coincide con los parametros de busqueda
      * 
      */
-    function getUser($conexion, $clave = null, $user = null)
+    function getUser($conexion, $clave = null, $user = null):array
     {
         //* query para obtener todos los usuarios
         $query = "SELECT
