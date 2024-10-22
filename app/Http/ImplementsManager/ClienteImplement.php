@@ -15,11 +15,11 @@ class ClienteImplement
      * @param string $telf
      * @param string $direccion
      * @param mixed $genero
-     * 
+     * @param mixed $id_p
      * @return [type]
      * 
      */
-    function create_cliente($conexion, $nombre, $ci, $ci_i, $telf, $direccion, $genero)
+    function create_cliente( $conexion, $nombre, $ci, $ci_i, $telf, $direccion, $genero, $id_p)
     {
 
         $data_cli = [
@@ -28,14 +28,15 @@ class ClienteImplement
             'identificacion_iso' => $ci_i,
             'telefonos' => json_encode($telf),
             'direcciones' => $direccion,
-            'genero' => $genero
+            'genero' => $genero,
+            'id_parroquia' => $id_p
         ];
 
         $conexion->table('clientes')->insert($data_cli);
         return $data_cli;
     }
 
-    function update_cliente($conexion, $id, $nombre, $ci, $ci_i, $telf, $direccion, $genero)
+    function update_cliente($conexion, $id, $nombre, $ci, $ci_i, $telf, $direccion, $genero, $id_p)
     {
 
         $data_cli = [
@@ -45,7 +46,8 @@ class ClienteImplement
             'identificacion_iso' => $ci_i,
             'telefonos' => json_encode($telf),
             'direcciones' => $direccion,
-            'genero' => $genero
+            'genero' => $genero,
+            'id_parroquia' => $id_p
         ];
 
         $conexion->table('clientes')->where('id', $id)->update($data_cli);

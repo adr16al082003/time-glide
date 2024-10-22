@@ -16,12 +16,15 @@ class clienteController extends Controller
 
     function create_cliente(Request $request){
         try{
-            $res = $this->clienteimplement->create_cliente(DB::connection(),$request->nombre,
-            $request->ci,
-            $request->ci_i,
-            $request->telf,
-            $request->direccion,
-            $request->genero);
+            dump($request->direcciones);
+            $res = $this->clienteimplement->create_cliente(DB::connection(),
+            $request->nombre, 
+            $request->identificacion,
+            $request->identificacion_iso,
+            $request->telefonos,
+            $request->direcciones,
+            $request->genero,
+            $request->id_parroquia);
         }catch(\Exception $e){
             return $e;
         }
@@ -32,11 +35,12 @@ class clienteController extends Controller
         try{
             $res = $this->clienteimplement->update_cliente(DB::connection(), $request->id,
             $request->nombre,
-            $request->ci,
-            $request->ci_i,
-            $request->telf,
+            $request->identificacion,
+            $request->identificacion_iso,
+            $request->telefono,
             $request->direccion,
-            $request->genero);
+            $request->genero,
+            $request->id_parroquia);
         }catch(\Exception $e){
             return $e;
         }
