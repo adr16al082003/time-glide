@@ -35,9 +35,9 @@ class Asistenciasv1 extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 300)->nullable(false);
-            $table->integer('identificacion')->unique()->nullable(false);
+            $table->bigInteger('identificacion')->unique()->nullable(false);
             $table->enum('identificacion_iso', ['E', 'V', 'P']);
-            $table->json('telefonos');
+            $table->bigInteger('telefonos')->unique()->nullable(false);
             $table->longText('direcciones');
             $table->enum('genero', ['F', 'M']);
             

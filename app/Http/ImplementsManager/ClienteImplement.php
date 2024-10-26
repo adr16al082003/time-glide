@@ -19,20 +19,20 @@ class ClienteImplement
      * @return [type]
      * 
      */
-    function create_cliente( $conexion, $nombre, $ci, $ci_i, $telf, $direccion, $genero, $id_p)
+    function create_cliente($conexion, $nombre, $ci, $ci_i, $telf, $direccion, $genero, $id_p)
     {
 
         $data_cli = [
             'nombre' => $nombre,
             'identificacion' => $ci,
             'identificacion_iso' => $ci_i,
-            'telefonos' => json_encode($telf),
+            'telefonos' => $telf,
             'direcciones' => $direccion,
             'genero' => $genero,
             'id_parroquia' => $id_p
         ];
 
-        $conexion->table('clientes')->insert($data_cli);
+        $data_cli['id'] = $conexion->table('clientes')->insertGetId($data_cli);
         return $data_cli;
     }
 
@@ -44,7 +44,7 @@ class ClienteImplement
             'nombre' => $nombre,
             'identificacion' => $ci,
             'identificacion_iso' => $ci_i,
-            'telefonos' => json_encode($telf),
+            'telefonos' => $telf,
             'direcciones' => $direccion,
             'genero' => $genero,
             'id_parroquia' => $id_p
@@ -60,15 +60,17 @@ class ClienteImplement
         return $conexion->table('clientes')->where('id', $id)->delete();
     }
 
-    function getCliente($conexion){
+    function getCliente($conexion)
+    {
         return $conexion->table('clientes')->get();
     }
 
-    function validateCli($conexion, $ci){
+    function validateCli($conexion, $ci)
+    {
         $data_cli = $conexion->selectOne('SELECT * FROM clientes WHERE clientes.identificacion = :identificacion', [
             'identificacion' => $ci
         ]);
-    
-            if(!empty($data_cli)) throw new \Exception("Cliente ya registrado");
+
+        if (!empty($data_cli)) throw new \Exception("Cliente ya registrado");
     }
 }
