@@ -16,7 +16,6 @@ class clienteController extends Controller
 
     function create_cliente(Request $request){
         try{
-            dump($request->direcciones);
             $res = $this->clienteimplement->create_cliente(DB::connection(),
             $request->nombre, 
             $request->identificacion,
@@ -37,8 +36,8 @@ class clienteController extends Controller
             $request->nombre,
             $request->identificacion,
             $request->identificacion_iso,
-            $request->telefono,
-            $request->direccion,
+            $request->telefonos,
+            $request->direcciones,
             $request->genero,
             $request->id_parroquia);
         }catch(\Exception $e){
