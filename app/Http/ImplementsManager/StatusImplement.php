@@ -14,13 +14,11 @@ class StatusImplement{
      * @return array
      * 
      */
-    public function create_status($conexion, $nombre_rol, $crear, $actualizar, $eliminar)
+    public function create_status($conexion, $nombre_rol, $module)
     {
         $data_rol = [
             'nombre' => $nombre_rol,
-            'w' => $crear,
-            'r' => $actualizar,
-            'd' => $eliminar,
+            'modules' => $module,
         ];
 
         $conexion->table('roles')->insert($data_rol);
@@ -41,14 +39,12 @@ class StatusImplement{
      * @return array
      * 
      */
-    function update_status($conexion, $id_r, $nombre_rol, $crear, $actualizar, $eliminar)
+    function update_status($conexion, $id_r, $nombre_rol, $module)
     {
         $data_rol = [
             'id' => $id_r,
             'nombre' => $nombre_rol,
-            'w' => $crear,
-            'r' => $actualizar,
-            'd' => $eliminar,
+            'modules' => $module,
         ];
         $conexion->table('roles')->where('id', $id_r)->update($data_rol);
 

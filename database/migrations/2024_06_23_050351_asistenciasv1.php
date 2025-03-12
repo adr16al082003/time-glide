@@ -17,9 +17,7 @@ class Asistenciasv1 extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 300)->nullable(false);
-            $table->boolean('w')->comment('para crear');
-            $table->boolean('r')->comment('leer');
-            $table->boolean('d')->comment('borrar');
+            $table->json('modules');
         });
 
         Schema::create('usuarios', function (Blueprint $table) {

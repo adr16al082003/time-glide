@@ -25,9 +25,7 @@ class rolesController extends Controller
     {
         try {
             $res = $this->statusimplement->create_status(DB::connection(), $request->nombre,
-            $request->crear, 
-            $request->actualizar, 
-            $request->eliminar);
+            $request->modules);
         } catch (\Exception $e) {
             return $e;
         }
@@ -39,9 +37,7 @@ class rolesController extends Controller
         try{
             $res = $this->statusimplement->update_status(DB::connection(), $request->id,
             $request->nombre,
-            $request->crear,
-            $request->actualizar,
-            $request->eliminar);
+            $request->modules);
         }catch(\Exception $e){
             return $e;
         }
