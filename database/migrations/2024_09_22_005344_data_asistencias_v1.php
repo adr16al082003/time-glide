@@ -14,21 +14,31 @@ class DataAsistenciasV1 extends Migration
      */
     public function up()
     {
-        //Date de roles
+
+        // Datos de roles
         DB::table('roles')->insert([
             [
                 "nombre" => "Administrador",
-                "w" => 1,
-                "r" => 1,
-                "d" => 1
+                "modules" => json_encode([
+                    ["name" => "Usuario", "view" => true, "create" => true, "update" => true, "delete" => true],
+                    ["name" => "Clientes", "view" => true, "create" => true, "update" => true, "delete" => true],
+                    ["name" => "Reuniones", "view" => true, "create" => true, "update" => true, "delete" => true],
+                    ["name" => "Permisos", "view" => true, "create" => true, "update" => true, "delete" => true],
+                    ["name" => "Reporte", "view" => true, "create" => true, "update" => true, "delete" => true],
+                ]),
             ],
             [
-                "nombre" => "Recepcionista",
-                "w" => 1,
-                "r" => 1,
-                "d" => 0
-            ]
+                "nombre" => "Operador",
+                "modules" => json_encode([
+                    ["name" => "Usuario", "view" => false, "create" => false, "update" => false, "delete" => false],
+                    ["name" => "Clientes", "view" => true, "create" => true, "update" => true, "delete" => false],
+                    ["name" => "Reuniones", "view" => true, "create" => true, "update" => true, "delete" => false],
+                    ["name" => "Permisos", "view" => false, "create" => false, "update" => false, "delete" => false],
+                    ["name" => "Reporte", "view" => true, "create" => true, "update" => true, "delete" => false],
+                ]),   
+            ],
         ]);
+
 
         //Data de usuarios
         DB::table('usuarios')->insert([

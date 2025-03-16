@@ -100,11 +100,7 @@ class UsuarioImplement
         usuarios.clave,
         roles.nombre as cargo,
         roles.id as id_rol,
-        JSON_OBJECT(
-            'create', IF(roles.w = 1, 'true', 'false'),
-            'edit', IF(roles.r = 1, 'true', 'false') ,
-             'delete',IF(roles.d = 1, 'true', 'false')
-        ) as permissions
+        roles.modules as permissions
         FROM usuarios
         INNER JOIN roles ON roles.id = usuarios.id_roles";
 
