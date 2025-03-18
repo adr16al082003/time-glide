@@ -20,21 +20,21 @@ class DataAsistenciasV1 extends Migration
             [
                 "nombre" => "Administrador",
                 "modules" => json_encode([
-                    ["name" => "Usuario", "view" => true, "create" => true, "update" => true, "delete" => true],
-                    ["name" => "Clientes", "view" => true, "create" => true, "update" => true, "delete" => true],
-                    ["name" => "Reuniones", "view" => true, "create" => true, "update" => true, "delete" => true],
-                    ["name" => "Permisos", "view" => true, "create" => true, "update" => true, "delete" => true],
-                    ["name" => "Reporte", "view" => true, "create" => true, "update" => true, "delete" => true],
+                    [ "id"=>1, "name" => "Usuario", "view" => true, "create" => true, "update" => true, "delete" => true],
+                    [ "id"=>2, "name" => "Clientes", "view" => true, "create" => true, "update" => true, "delete" => true],
+                    [ "id"=>3, "name" => "Reuniones", "view" => true, "create" => true, "update" => true, "delete" => true],
+                    [ "id"=>4, "name" => "Permisos", "view" => true, "create" => true, "update" => true, "delete" => true],
+                    [ "id"=>5, "name" => "Reporte", "view" => true, "create" => true, "update" => true, "delete" => true],
                 ]),
             ],
             [
                 "nombre" => "Operador",
                 "modules" => json_encode([
-                    ["name" => "Usuario", "view" => false, "create" => false, "update" => false, "delete" => false],
-                    ["name" => "Clientes", "view" => true, "create" => true, "update" => true, "delete" => false],
-                    ["name" => "Reuniones", "view" => true, "create" => true, "update" => true, "delete" => false],
-                    ["name" => "Permisos", "view" => false, "create" => false, "update" => false, "delete" => false],
-                    ["name" => "Reporte", "view" => true, "create" => true, "update" => true, "delete" => false],
+                    [ "id"=>1, "name" => "Usuario", "view" => false, "create" => false, "update" => false, "delete" => false],
+                    [ "id"=>2, "name" => "Clientes", "view" => true, "create" => true, "update" => true, "delete" => false],
+                    [ "id"=>3, "name" => "Reuniones", "view" => true, "create" => true, "update" => true, "delete" => false],
+                    [ "id"=>4, "name" => "Permisos", "view" => false, "create" => false, "update" => false, "delete" => false],
+                    [ "id"=>5, "name" => "Reporte", "view" => true, "create" => true, "update" => true, "delete" => false],
                 ]),   
             ],
         ]);
